@@ -1,0 +1,17 @@
+{
+  "clients": [],
+  "retainers": [],
+  "pipeline": {
+    "stages": ["lead", "qualified", "proposal_sent", "negotiating", "won", "delivering", "completed", "retainer"],
+    "current": {}
+  },
+  "metrics": {
+    "total_clients": 0,
+    "active_retainers": 0,
+    "retainer_mrr": 0,
+    "total_revenue": 0,
+    "avg_project_value": 0,
+    "client_satisfaction_avg": 0
+  },
+  "updated_at": "2026-03-06"
+}

@@ -1,0 +1,78 @@
+{
+  "agency_name": "Darkcode AI",
+  "tagline": "AI-powered automation for small businesses",
+  "services": [
+    {
+      "id": "website_chatbot",
+      "name": "Website Chatbot",
+      "description": "AI chatbot for your website — answers questions, captures leads, books appointments",
+      "tiers": {
+        "basic": {"price_setup": 300, "price_monthly": 100, "delivery_days": 3, "automation_pct": 80},
+        "standard": {"price_setup": 750, "price_monthly": 200, "delivery_days": 7, "automation_pct": 80},
+        "premium": {"price_setup": 1500, "price_monthly": 400, "delivery_days": 14, "automation_pct": 80}
+      },
+      "includes_basic": ["FAQ bot", "Lead capture form", "Email notifications"],
+      "includes_standard": ["Custom knowledge base", "CRM integration", "Calendly booking"],
+      "includes_premium": ["Full custom build", "CRM sync", "Analytics dashboard", "Priority support", "Monthly optimization"]
+    },
+    {
+      "id": "small_business_bot",
+      "name": "Small Business Bot",
+      "description": "FAQ + lead qualification + appointment booking for local businesses",
+      "tiers": {
+        "basic": {"price_setup": 500, "price_monthly": 150, "delivery_days": 3, "automation_pct": 90},
+        "standard": {"price_setup": 1000, "price_monthly": 300, "delivery_days": 7, "automation_pct": 90},
+        "premium": {"price_setup": 2000, "price_monthly": 500, "delivery_days": 14, "automation_pct": 90}
+      },
+      "target_industries": ["dentist", "salon", "gym", "restaurant", "plumber", "real estate"]
+    },
+    {
+      "id": "real_estate_bot",
+      "name": "Real Estate Bot",
+      "description": "Property Q&A + lead capture + showing scheduler for agents/brokerages",
+      "tiers": {
+        "basic": {"price_setup": 500, "price_monthly": 150, "delivery_days": 3, "automation_pct": 85},
+        "standard": {"price_setup": 1000, "price_monthly": 300, "delivery_days": 7, "automation_pct": 85},
+        "premium": {"price_setup": 2500, "price_monthly": 600, "delivery_days": 14, "automation_pct": 85}
+      }
+    },
+    {
+      "id": "web_scraping",
+      "name": "Web Scraping / Data Extraction",
+      "description": "Custom Python scrapers for any website — data pipelines, monitoring, reports",
+      "tiers": {
+        "basic": {"price_flat": 150, "delivery_days": 2, "automation_pct": 95},
+        "standard": {"price_flat": 500, "delivery_days": 5, "automation_pct": 95},
+        "premium": {"price_flat": 1000, "delivery_days": 7, "automation_pct": 95}
+      }
+    },
+    {
+      "id": "python_automation",
+      "name": "Python Automation",
+      "description": "Automate reports, forms, APIs, data processing — any repetitive task",
+      "tiers": {
+        "basic": {"price_flat": 300, "delivery_days": 3, "automation_pct": 90},
+        "standard": {"price_flat": 800, "delivery_days": 5, "automation_pct": 90},
+        "premium": {"price_flat": 1500, "delivery_days": 10, "automation_pct": 90}
+      }
+    },
+    {
+      "id": "ai_workflow",
+      "name": "AI Workflow (n8n / Make / Zapier)",
+      "description": "No-code/low-code automation workflows connecting your business tools",
+      "tiers": {
+        "basic": {"price_setup": 300, "delivery_days": 2, "automation_pct": 85},
+        "standard": {"price_setup": 750, "price_monthly": 200, "delivery_days": 5, "automation_pct": 85},
+        "premium": {"price_setup": 1500, "delivery_days": 10, "automation_pct": 85}
+      }
+    }
+  ],
+  "tier_definitions": {
+    "basic": "Template with client customization. Delivered in 2-3 days.",
+    "standard": "Custom build + 1-2 integrations (CRM, Calendly, etc). Delivered in 5-7 days.",
+    "premium": "Full custom + CRM sync + ongoing optimization + priority support. Delivered in 7-14 days."
+  },
+  "retainer_pitch": "Every delivery includes a retainer pitch: 'For $X/mo, I keep your bot updated, optimized, and running 24/7.'",
+  "removed_services": ["Trading bot white-label — Killshot lost $3K+, Hawk lost $1K. Do NOT sell trading systems until profitable internally."],
+  "updated_at": "2026-03-06"
+}

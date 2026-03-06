@@ -1,0 +1,127 @@
+{
+  "agency": "Darkcode AI",
+  "owner": "Abdalla Al-Hamdan",
+  "tagline": "AI-powered automation for small businesses",
+  "elevator_pitch": "I build AI chatbots and automation systems that save small businesses 20+ hours per week. From website chatbots that capture leads 24/7, to custom Python scripts that eliminate repetitive tasks — I deliver working solutions in 2-7 days.",
+
+  "platforms": {
+    "freelancer": {
+      "status": "live",
+      "username": "AbdallaDevs",
+      "url": "https://www.freelancer.com/u/AbdallaDevs",
+      "headline": "AI Chatbot Developer & Python Automation Expert",
+      "bio": "I build AI chatbots and automation tools that save businesses time and money.\n\nWhat I deliver:\n- Website chatbots (FAQ, lead capture, appointment booking)\n- WhatsApp/Telegram bots for customer support\n- Python automation (reports, data pipelines, web scraping)\n- AI workflows (n8n, Make, Zapier integrations)\n\nMy process:\n1. You tell me what you need\n2. I scope it and quote a fixed price\n3. I build and deliver in 2-7 days\n4. You get free revisions until you're happy\n\nI use AI to work fast, and I'm transparent about it. You get quality results at a fraction of the cost of a traditional dev shop.\n\nChat only — no calls. Fast replies during ET business hours.",
+      "skills": ["Python", "AI Chatbot", "Web Scraping", "Automation", "Flask", "API Development", "WhatsApp Bot", "Telegram Bot", "Data Processing", "n8n"],
+      "portfolio_items": [
+        {
+          "title": "AI Website Chatbot — Lead Capture + FAQ",
+          "description": "Built a website chatbot for a real estate agency. Handles property questions, captures buyer leads, schedules showings. Reduced response time from 4 hours to instant.",
+          "tech": ["Python", "Flask", "OpenAI API", "HTML/CSS/JS"],
+          "result": "3x more leads captured per month"
+        },
+        {
+          "title": "Automated Data Pipeline — CSV to Dashboard",
+          "description": "Python automation that pulls sales data from 3 sources, cleans and merges it, generates weekly reports. Replaced 6 hours of manual Excel work.",
+          "tech": ["Python", "pandas", "requests", "openpyxl"],
+          "result": "6 hours/week saved"
+        },
+        {
+          "title": "Web Scraper — Real Estate Listings",
+          "description": "Custom scraper that monitors property listings across 5 sites, alerts client when new properties match criteria. Handles pagination, anti-bot measures, deduplication.",
+          "tech": ["Python", "BeautifulSoup", "requests", "SQLite"],
+          "result": "First-mover advantage on new listings"
+        },
+        {
+          "title": "Telegram Bot — Appointment Scheduler",
+          "description": "Telegram bot for a salon that handles bookings, sends reminders, manages waitlist. Integrated with Google Calendar.",
+          "tech": ["Python", "python-telegram-bot", "Google Calendar API"],
+          "result": "40% fewer no-shows"
+        }
+      ]
+    },
+
+    "fiverr": {
+      "status": "draft",
+      "note": "Tax approval pending",
+      "gigs": [
+        {
+          "title": "I will build an AI chatbot for your website or business",
+          "category": "Programming & Tech > Chatbots",
+          "description": "Get a custom AI chatbot that works 24/7 for your business.\n\nWhat you get:\n- AI-powered chatbot that answers customer questions\n- Lead capture (name, email, phone)\n- Appointment/booking integration\n- Embeddable on any website (1 line of code)\n- Mobile-friendly design\n\nPerfect for:\n- Real estate agents\n- Dental offices, salons, gyms\n- Restaurants\n- Any service business\n\nI use Python + AI to build fast, reliable chatbots. Delivered as a working solution you can embed on your site today.\n\nMessage me with your business type and I'll send you a custom demo.",
+          "packages": {
+            "basic": {"name": "Starter Bot", "price": 300, "delivery": 3, "revisions": 2, "includes": "FAQ bot + lead capture + email alerts"},
+            "standard": {"name": "Pro Bot", "price": 750, "delivery": 7, "revisions": 3, "includes": "Custom knowledge base + CRM integration + Calendly booking"},
+            "premium": {"name": "Enterprise Bot", "price": 1500, "delivery": 14, "revisions": "unlimited", "includes": "Full custom + CRM sync + analytics + priority support + monthly optimization"}
+          },
+          "tags": ["ai chatbot", "website chatbot", "lead capture bot", "customer service bot", "python chatbot"],
+          "faq": [
+            {"q": "Do I need technical skills?", "a": "No. I handle everything. You just paste one line of code on your website."},
+            {"q": "Can it integrate with my CRM?", "a": "Yes — HubSpot, Salesforce, Zoho, or any CRM with an API."},
+            {"q": "What if I need changes later?", "a": "I offer monthly maintenance plans starting at $100/mo. Or you can order one-time updates."},
+            {"q": "Do you use AI tools to build this?", "a": "Yes, I use AI to accelerate development. This means faster delivery and lower cost for you. Full transparency."}
+          ]
+        },
+        {
+          "title": "I will automate your repetitive tasks with Python",
+          "category": "Programming & Tech > Python",
+          "description": "Stop wasting hours on repetitive work. I'll build a Python script that does it for you.\n\nWhat I automate:\n- Data entry and processing\n- Report generation (Excel, PDF, CSV)\n- Web scraping and monitoring\n- API integrations between tools\n- File management and organization\n- Email parsing and routing\n\nHow it works:\n1. Tell me what you do manually today\n2. I build a Python script that does it automatically\n3. You run it with one click (or schedule it)\n\nI've automated workflows for real estate agencies, e-commerce stores, marketing teams, and more.",
+          "packages": {
+            "basic": {"name": "Simple Script", "price": 150, "delivery": 2, "revisions": 2, "includes": "Single-task automation + documentation"},
+            "standard": {"name": "Full Pipeline", "price": 500, "delivery": 5, "revisions": 3, "includes": "Multi-step automation + scheduling + error handling"},
+            "premium": {"name": "Enterprise Solution", "price": 1000, "delivery": 7, "revisions": "unlimited", "includes": "Complex pipeline + dashboard + monitoring + ongoing support"}
+          },
+          "tags": ["python automation", "web scraping", "data processing", "report automation", "task automation"],
+          "faq": [
+            {"q": "What if my task is complex?", "a": "Message me first. I'll assess it and give you an honest quote. If it's beyond scope, I'll tell you."},
+            {"q": "Can it run on a schedule?", "a": "Yes. I can set it up to run daily, weekly, or on any schedule you need."},
+            {"q": "Do I need Python installed?", "a": "I'll provide clear setup instructions. For hosted solutions, I can deploy it so you don't need anything installed."}
+          ]
+        }
+      ]
+    },
+
+    "upwork": {
+      "status": "draft",
+      "note": "Tax approval pending",
+      "headline": "AI Chatbot Developer | Python Automation | Web Scraping",
+      "overview": "I build AI-powered tools that save small businesses time and money.\n\nMy core services:\n1. AI Chatbots — Website bots that answer questions, capture leads, book appointments. Delivered in 2-7 days.\n2. Python Automation — Scripts that eliminate repetitive tasks. Reports, data processing, API integrations.\n3. Web Scraping — Custom scrapers for any website. Monitoring, alerts, data pipelines.\n4. AI Workflows — n8n/Make/Zapier integrations connecting your business tools.\n\nWhy work with me:\n- Fixed pricing, no surprises\n- Fast delivery (2-7 days for most projects)\n- I use AI to work faster — you benefit from lower costs\n- Chat-only communication (fast replies, no lengthy calls)\n- Free revisions until you're satisfied\n\nI'm transparent about using AI tools in my workflow. This means you get higher quality work delivered faster at a better price.\n\nIndustries I've served: Real estate, dental, salons, restaurants, e-commerce, marketing agencies.\n\nMessage me with what you need and I'll send a fixed-price quote within 24 hours.",
+      "skills": ["Python", "AI/ML", "Chatbot Development", "Web Scraping", "Flask", "API Development", "Automation", "Data Processing"],
+      "hourly_rate": 45,
+      "portfolio_same_as": "freelancer"
+    },
+
+    "linkedin": {
+      "status": "planned",
+      "note": "Max handles LinkedIn content. Profile needs manual setup.",
+      "headline": "AI Chatbot Developer | Helping Small Businesses Automate with AI",
+      "about": "I build AI chatbots and automation systems for small businesses.\n\nMost small business owners waste 10-20 hours per week on tasks a bot could handle — answering the same questions, scheduling appointments, processing data, generating reports.\n\nI fix that.\n\nMy agency (Darkcode AI) delivers:\n- Website chatbots that capture leads 24/7\n- Appointment booking bots for service businesses\n- Python automation for repetitive workflows\n- Web scraping and data pipelines\n\nFixed pricing. Fast delivery. No fluff.\n\nIf you run a small business and want to automate something, DM me.",
+      "featured_post_ideas": [
+        "How I built a chatbot that captures 3x more leads for a real estate agency",
+        "The real cost of NOT automating: 20 hours/week x $30/hr = $31,200/year wasted",
+        "I use AI to build AI tools. Here's why that's a good thing for my clients."
+      ]
+    }
+  },
+
+  "universal_elements": {
+    "key_differentiators": [
+      "Fixed pricing — no hourly billing surprises",
+      "2-7 day delivery on most projects",
+      "AI-accelerated development (transparent about it)",
+      "Chat-only communication (fast, async)",
+      "Free revisions until satisfaction"
+    ],
+    "social_proof_targets": [
+      "First 3 clients: offer 50% discount for testimonial rights",
+      "Build 2-3 demo bots as portfolio pieces (live demos)",
+      "Document case studies from each delivery"
+    ],
+    "bidding_templates": {
+      "chatbot_bid": "Hi! I build AI chatbots for small businesses. For your project, I can deliver a [FAQ/lead capture/booking] bot in [X] days.\n\nWhat you'll get:\n- [specific deliverable 1]\n- [specific deliverable 2]\n- [specific deliverable 3]\n\nI use AI tools to work fast, which means better results at a lower cost.\n\nHappy to discuss details over chat. No calls needed.",
+      "automation_bid": "Hi! I specialize in Python automation. I can build a script that [specific task] and save you [X] hours per week.\n\nDeliverables:\n- [specific deliverable 1]\n- [specific deliverable 2]\n- Documentation + setup guide\n\nFixed price, delivered in [X] days. Message me to discuss details.",
+      "scraping_bid": "Hi! I build custom web scrapers. For [target site], I can extract [specific data] and deliver it as [JSON/CSV/database].\n\nIncludes:\n- [specific feature 1]\n- [specific feature 2]\n- Anti-detection + rate limiting\n\nFixed price. Ready to start immediately."
+    }
+  },
+
+  "updated_at": "2026-03-06"
+}

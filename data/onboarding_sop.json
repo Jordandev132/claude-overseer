@@ -1,0 +1,89 @@
+{
+  "title": "Client Onboarding SOP",
+  "version": "1.0",
+  "stages": [
+    {
+      "stage": 1,
+      "name": "Intake",
+      "checklist": [
+        "Collect business name, industry, website URL",
+        "Identify pain point (FAQ overload, missed bookings, slow response)",
+        "Determine service tier (basic/standard/premium)",
+        "Agree on budget and timeline",
+        "Get access credentials (website admin, CRM login if needed)"
+      ],
+      "owner": "jordan",
+      "template": "intake_form"
+    },
+    {
+      "stage": 2,
+      "name": "Scoping",
+      "checklist": [
+        "Define bot personality and tone",
+        "List 10-20 FAQs with approved answers",
+        "Identify integrations needed (Calendly, CRM, email)",
+        "Set KPIs (response time, booking rate, lead capture rate)",
+        "Send proposal with timeline and price"
+      ],
+      "owner": "thor",
+      "template": "proposal_template"
+    },
+    {
+      "stage": 3,
+      "name": "Build",
+      "checklist": [
+        "Clone appropriate Thor template",
+        "Customize knowledge base with client FAQs",
+        "Configure integrations",
+        "Test all conversation flows",
+        "Deploy to staging environment"
+      ],
+      "owner": "thor",
+      "template": "build_checklist"
+    },
+    {
+      "stage": 4,
+      "name": "Review",
+      "checklist": [
+        "Client tests bot on staging",
+        "Collect feedback and iterate (max 2 revision rounds)",
+        "Final approval from client",
+        "Deploy to production"
+      ],
+      "owner": "jordan"
+    },
+    {
+      "stage": 5,
+      "name": "Delivery",
+      "checklist": [
+        "Send deployment confirmation",
+        "Provide usage guide / training doc",
+        "Set up monitoring (uptime, response quality)",
+        "Schedule 1-week check-in",
+        "Pitch retainer: '$X/mo for ongoing optimization and support'"
+      ],
+      "owner": "jordan",
+      "template": "delivery_email"
+    },
+    {
+      "stage": 6,
+      "name": "Retainer",
+      "checklist": [
+        "Monthly performance report",
+        "Knowledge base updates as needed",
+        "Priority support response",
+        "Quarterly optimization review",
+        "Upsell opportunities (additional features, new bots)"
+      ],
+      "owner": "claude",
+      "note": "Claude monitors retainer renewals and flags expiring ones"
+    }
+  ],
+  "templates_needed": [
+    "intake_form",
+    "proposal_template",
+    "build_checklist",
+    "delivery_email",
+    "retainer_agreement"
+  ]
+}
