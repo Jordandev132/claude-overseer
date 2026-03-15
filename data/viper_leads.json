@@ -1,0 +1,66 @@
+{
+  "leads": [
+    {
+      "id": "lead_aa22d56f",
+      "source": "n8n_community",
+      "url": "https://community.n8n.io/t/hiring-freelance-agency-ai-automation-engineer-n8n-make-apis-remote/275368",
+      "title": "Hiring: Freelance/Agency AI Automation Engineer (n8n / Make / APIs) \u2014 Remote",
+      "description": "Hey everyone,\nWe\u2019re a recruitment (marketing) company based in the Netherlands. We\u2019re looking for a freelance AI Automation Engineer to help us build and maintain automation systems across our operations.\nWhat you\u2019ll be building:\n\n\nMeta Ads ops automation (ad copy, creatives, campaign setup)\n\n\nLinke",
+      "budget": "",
+      "scores": {
+        "fit": 10,
+        "rate": 5,
+        "effort": 6,
+        "competition": 10,
+        "client": 8,
+        "composite": 7.8
+      },
+      "recommended_service": "web_scraping_pipeline",
+      "recommended_bid": "Reach out",
+      "surfaced_at": "2026-03-10T06:53:53.392558-04:00",
+      "status": "bid",
+      "hash": "aa22d56f5f011b07",
+      "skills": [
+        "scraper",
+        "api",
+        "automation",
+        "ai",
+        "whatsapp",
+        "n8n",
+        "workflow",
+        "marketing"
+      ],
+      "bid_count": null,
+      "client_country": "",
+      "status_updated_at": "2026-03-11T13:14:14.438244-04:00"
+    },
+    {
+      "id": "lead_9ee9d9c8",
+      "source": "hackernews",
+      "url": "https://news.ycombinator.com/item?id=47270839",
+      "title": "SEEKING WORK | Worldwide RemoteFractional Project &amp; Operations ManagerI help founders and teams get time back in the",
+      "description": "SEEKING WORK | Worldwide Remote  Fractional Project &amp; Operations Manager  I help founders and teams get time back in their week by taking over the delivery and ops work that slows everything down. I plug in part-time or fractional, work fully remote and keep execution moving so you can focus on ",
+      "budget": "",
+      "scores": {
+        "fit": 6,
+        "rate": 2,
+        "effort": 4,
+        "competition": 10,
+        "client": 8,
+        "composite": 6.4,
+        "source_adjustment": 1.0
+      },
+      "recommended_service": "ai_chatbot_premium",
+      "recommended_bid": "Apply",
+      "surfaced_at": "2026-03-15T11:40:38.406988-04:00",
+      "status": "new",
+      "hash": "9ee9d9c8dfbcac3c",
+      "skills": [
+        "ai"
+      ],
+      "bid_count": null,
+      "client_country": ""
+    }
+  ],
+  "updated_at": "2026-03-15T12:03:53.298809-04:00"
+}
