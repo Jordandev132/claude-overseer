@@ -8,12 +8,20 @@ Port 8878.
 
 import json
 import logging
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 from flask import Flask, render_template_string
 
 import config
+
+sys.path.insert(0, str(Path.home() / "shared"))
+try:
+    from finances import get_monthly_summary as _fin_summary, get_alerts as _fin_alerts, get_upcoming_renewals as _fin_renewals, _load as _fin_load
+    _HAS_FINANCES = True
+except ImportError:
+    _HAS_FINANCES = False
 
 app = Flask(__name__)
 log = logging.getLogger("dashboard")
@@ -197,6 +205,20 @@ TEMPLATE = """\
   .thor-badge { font-size: 10px; padding: 1px 6px; border-radius: 4px; font-weight: 600; }
   .tb-progress { background: var(--blue-bg); color: var(--blue); }
   .tb-pending { background: rgba(255,255,255,0.05); color: var(--dim); }
+
+  /* Finance */
+  .ct-finance { color: var(--yellow); }
+  .fin-sub-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .fin-sub-row:last-child { border-bottom: none; }
+  .proj-tag { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 4px; }
+  .proj-soren { background: rgba(232,121,249,0.15); color: #E879F9; }
+  .proj-brotherhood { background: var(--blue-bg); color: var(--blue); }
+  .proj-agency { background: var(--green-bg); color: var(--green); }
+  .proj-other { background: rgba(255,255,255,0.05); color: var(--dim); }
+  .green { color: var(--green); }
+  .red { color: var(--red); }
+  .yellow { color: var(--yellow); }
+  .dim { color: var(--dim); }
 </style>
 </head>
 <body>
@@ -297,6 +319,89 @@ TEMPLATE = """\
     </div>
   </div>
 </div>
+
+<!-- FINANCES -->
+<div class="section-header"><span>$</span> Finances</div>
+<div class="grid">
+  <div class="card">
+    <div class="card-title ct-finance"><span class="icon">$</span> Monthly Summary — {{ fin.month }}</div>
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-label">Total Costs</div>
+        <div class="stat-val red">${{ "%.2f"|format(fin.total_costs) }}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Revenue</div>
+        <div class="stat-val green">${{ "%.2f"|format(fin.total_revenue) }}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Net</div>
+        <div class="stat-val {{ 'green' if fin.net >= 0 else 'red' }}">${{ "%.2f"|format(fin.net) }}</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Active Subs</div>
+        <div class="stat-val">{{ fin.active_count }}</div>
+      </div>
+    </div>
+    <div style="margin-top: 10px;">
+      <div class="row">
+        <span class="row-label">Subscriptions/mo</span>
+        <span class="row-val red">${{ "%.2f"|format(fin.total_subscriptions) }}</span>
+      </div>
+      <div class="row">
+        <span class="row-label">API Costs MTD</span>
+        <span class="row-val red">${{ "%.2f"|format(fin.total_api) }}</span>
+      </div>
+      <div class="row">
+        <span class="row-label">One-Time MTD</span>
+        <span class="row-val red">${{ "%.2f"|format(fin.total_one_time) }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title ct-finance"><span class="icon">*</span> Subscriptions</div>
+    {% for sub in fin_subs %}
+    <div class="fin-sub-row">
+      <span style="flex:1;">{{ sub.name }}</span>
+      <span class="proj-tag proj-{{ sub.project }}">{{ sub.project }}</span>
+      <span style="width:70px; text-align:right; font-weight:600; font-family:monospace;">{{ "$%.2f"|format(sub.cost) if sub.cost > 0 else "FREE" }}</span>
+    </div>
+    {% endfor %}
+    {% if not fin_subs %}
+    <div class="empty">No subscriptions.</div>
+    {% endif %}
+  </div>
+</div>
+
+{% if fin.by_project %}
+<div class="grid" style="margin-top: 12px;">
+  <div class="card card-full">
+    <div class="card-title ct-finance"><span class="icon">#</span> By Project</div>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+      {% for proj, vals in fin.by_project.items() %}
+      <div style="flex: 1; min-width: 160px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 8px; padding: 12px;">
+        <div style="font-weight: 700; font-size: 13px; color: var(--white); margin-bottom: 6px; text-transform: uppercase;">{{ proj }}</div>
+        <div style="font-size: 12px;">Costs: <span class="red">${{ "%.2f"|format(vals.costs) }}</span></div>
+        <div style="font-size: 12px;">Revenue: <span class="green">${{ "%.2f"|format(vals.revenue) }}</span></div>
+        <div style="font-size: 12px;">Net: <span class="{{ 'green' if vals.net >= 0 else 'red' }}" style="font-weight:700;">${{ "%.2f"|format(vals.net) }}</span></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if fin_alerts %}
+<div class="grid" style="margin-top: 12px;">
+  <div class="card card-full">
+    <div class="card-title" style="color: var(--yellow);"><span class="icon">!</span> Financial Alerts</div>
+    {% for a in fin_alerts %}
+    <div class="question">{{ a }}</div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
 
 <!-- Q2: AGENTS -->
 <div class="section-header"><span>@</span> Agents</div>
@@ -489,6 +594,28 @@ TEMPLATE = """\
 """
 
 
+_FIN_DEFAULTS = {"month": "2026-03", "total_costs": 0, "total_revenue": 0,
+                  "net": 0, "total_subscriptions": 0, "total_api": 0,
+                  "total_one_time": 0, "active_count": 0, "by_project": {}}
+
+
+def _load_finances():
+    """Load finance data. Returns (summary, subscriptions, alerts)."""
+    if not _HAS_FINANCES:
+        return _FIN_DEFAULTS.copy(), [], []
+    try:
+        summary = _fin_summary()
+        data = _fin_load()
+        subs = [s for s in data.get("subscriptions", []) if s.get("status") == "active"]
+        summary["active_count"] = len(subs)
+        for p in ("agency", "max"):
+            if p not in summary.get("by_project", {}):
+                summary.setdefault("by_project", {})[p] = {"costs": 0, "revenue": 0, "net": 0}
+        return summary, subs, _fin_alerts()
+    except Exception:
+        return _FIN_DEFAULTS.copy(), [], []
+
+
 def _load(path: Path, default=None):
     if not path.exists():
         return default if default is not None else {}
@@ -623,6 +750,9 @@ def index():
         t.setdefault("priority", 1)
         t.setdefault("status", "pending")
 
+    # -- Finances --
+    fin_summary, fin_subs, fin_alerts = _load_finances()
+
     return render_template_string(
         TEMPLATE,
         claude=claude,
@@ -637,6 +767,9 @@ def index():
         leads=leads,
         thor_tasks=thor_tasks,
         profiles=profiles,
+        fin=fin_summary,
+        fin_subs=fin_subs,
+        fin_alerts=fin_alerts,
     )
 
 
@@ -653,6 +786,26 @@ def api_status():
         "leads": _load(config.VIPER_LEADS_FILE),
         "max_status": _load(config.MAX_STATUS_FILE),
     }
+
+
+@app.route("/api/finances")
+def api_finances():
+    """Finances JSON API."""
+    if not _HAS_FINANCES:
+        return {"error": "finances module not available"}, 500
+    try:
+        data = _fin_load()
+        return {
+            "subscriptions": data.get("subscriptions", []),
+            "api_costs": data.get("api_costs", []),
+            "one_time_costs": data.get("one_time_costs", []),
+            "revenue": data.get("revenue", []),
+            "summary": _fin_summary(),
+            "alerts": _fin_alerts(),
+            "upcoming_renewals": _fin_renewals(),
+        }
+    except Exception as e:
+        return {"error": str(e)}, 500
 
 
 if __name__ == "__main__":

@@ -11,7 +11,7 @@ from config import (
     CONTENT_METRICS_FILE, HEALTH_STATUS_FILE, AGENT_STATUS_FILE,
     GIG_INBOX_FILE, DIRECTIVES_FILE, DAILY_COST_ALERT_USD,
     MAX_STATUS_FILE, MAX_QUEUE_FILE, SERVICES_FILE, ONBOARDING_FILE,
-    PROFILES_FILE,
+    PROFILES_FILE, FINANCES_FILE, JORDAN_TASKS_FILE, PROPOSALS_DIR,
 )
 
 log = logging.getLogger("overseer.ingest")
@@ -94,6 +94,19 @@ def _build_health_status() -> dict | None:
     return health
 
 
+def _list_proposals() -> list[dict] | None:
+    """List recent proposals from Thor's proposal generator."""
+    proposals = []
+    for f in sorted(PROPOSALS_DIR.glob("proposal_*.md"), reverse=True)[:10]:
+        st = f.stat()
+        proposals.append({
+            "filename": f.name,
+            "size": st.st_size,
+            "created": datetime.fromtimestamp(st.st_ctime, tz=timezone.utc).isoformat(),
+        })
+    return proposals or None
+
+
 def pull_all() -> dict:
     """Pull all data sources into a single dict for prompt building.
 
@@ -114,6 +127,9 @@ def pull_all() -> dict:
         "services": _read_json(SERVICES_FILE),
         "onboarding_sop": _read_json(ONBOARDING_FILE),
         "profiles": _read_json(PROFILES_FILE),
+        "jordan_tasks": _read_json(JORDAN_TASKS_FILE),
+        "finances": _read_json(FINANCES_FILE),
+        "proposals": _list_proposals(),
     }
 
     # Count what we got

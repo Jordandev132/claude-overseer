@@ -21,7 +21,7 @@
       "checklist": [
         "Define bot personality and tone",
         "List 10-20 FAQs with approved answers",
-        "Identify integrations needed (Calendly, CRM, email)",
+        "Identify integrations needed (CRM, email, payment)",
         "Set KPIs (response time, booking rate, lead capture rate)",
         "Send proposal with timeline and price"
       ],

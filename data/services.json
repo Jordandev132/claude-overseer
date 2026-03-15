@@ -12,7 +12,7 @@
         "premium": {"price_setup": 1500, "price_monthly": 400, "delivery_days": 14, "automation_pct": 80}
       },
       "includes_basic": ["FAQ bot", "Lead capture form", "Email notifications"],
-      "includes_standard": ["Custom knowledge base", "CRM integration", "Calendly booking"],
+      "includes_standard": ["Custom knowledge base", "CRM integration", "Booking system"],
       "includes_premium": ["Full custom build", "CRM sync", "Analytics dashboard", "Priority support", "Monthly optimization"]
     },
     {
@@ -69,7 +69,7 @@
   ],
   "tier_definitions": {
     "basic": "Template with client customization. Delivered in 2-3 days.",
-    "standard": "Custom build + 1-2 integrations (CRM, Calendly, etc). Delivered in 5-7 days.",
+    "standard": "Custom build + 1-2 integrations (CRM, booking, etc). Delivered in 5-7 days.",
     "premium": "Full custom + CRM sync + ongoing optimization + priority support. Delivered in 7-14 days."
   },
   "retainer_pitch": "Every delivery includes a retainer pitch: 'For $X/mo, I keep your bot updated, optimized, and running 24/7.'",

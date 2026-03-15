@@ -50,7 +50,7 @@
           "description": "Get a custom AI chatbot that works 24/7 for your business.\n\nWhat you get:\n- AI-powered chatbot that answers customer questions\n- Lead capture (name, email, phone)\n- Appointment/booking integration\n- Embeddable on any website (1 line of code)\n- Mobile-friendly design\n\nPerfect for:\n- Real estate agents\n- Dental offices, salons, gyms\n- Restaurants\n- Any service business\n\nI use Python + AI to build fast, reliable chatbots. Delivered as a working solution you can embed on your site today.\n\nMessage me with your business type and I'll send you a custom demo.",
           "packages": {
             "basic": {"name": "Starter Bot", "price": 300, "delivery": 3, "revisions": 2, "includes": "FAQ bot + lead capture + email alerts"},
-            "standard": {"name": "Pro Bot", "price": 750, "delivery": 7, "revisions": 3, "includes": "Custom knowledge base + CRM integration + Calendly booking"},
+            "standard": {"name": "Pro Bot", "price": 750, "delivery": 7, "revisions": 3, "includes": "Custom knowledge base + CRM integration + booking system"},
             "premium": {"name": "Enterprise Bot", "price": 1500, "delivery": 14, "revisions": "unlimited", "includes": "Full custom + CRM sync + analytics + priority support + monthly optimization"}
           },
           "tags": ["ai chatbot", "website chatbot", "lead capture bot", "customer service bot", "python chatbot"],

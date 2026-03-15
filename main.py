@@ -109,6 +109,23 @@ def run_cycle() -> bool:
     # 8. LOG — full audit trail
     log_mod.write_cycle_log(decision, ingested, actions_taken, latency_ms)
 
+    # 9. JORDAN TASKS — auto-detect completions then remind about pending
+    try:
+        from jordan_tasks_detector import run_detection
+        auto_completed = run_detection()
+        if auto_completed:
+            log.info("Auto-detected %d completed Jordan tasks: %s",
+                     len(auto_completed),
+                     ", ".join(t["id"] for t in auto_completed))
+
+        from jordan_tasks import process_reminders
+        result = process_reminders()
+        if result["standalone"] or result["daily_digest"] or result["weekly_digest"]:
+            log.info("Jordan reminders: %d standalone, daily=%s, weekly=%s",
+                     result["standalone"], result["daily_digest"], result["weekly_digest"])
+    except Exception as e:
+        log.debug("Jordan tasks check skipped: %s", str(e)[:100])
+
     log.info("Cycle complete: %d actions taken", len(actions_taken))
     return True
 

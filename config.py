@@ -67,6 +67,9 @@ MAX_QUEUE_FILE = Path.home() / "max" / "data" / "content_queue.json"
 SERVICES_FILE = DATA_DIR / "services.json"
 ONBOARDING_FILE = DATA_DIR / "onboarding_sop.json"
 PROFILES_FILE = DATA_DIR / "profiles.json"
+FINANCES_FILE = DATA_DIR / "finances.json"
+JORDAN_TASKS_FILE = Path.home() / "polymarket-bot" / "data" / "jordan_tasks.json"
+PROPOSALS_DIR = Path.home() / "thor" / "data" / "proposals"
 
 # ── Permissions (what Claude can do autonomously) ──
 AUTO_PERMISSIONS = {

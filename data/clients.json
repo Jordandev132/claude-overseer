@@ -1,17 +1,33 @@
 {
+  "leads": [],
   "clients": [],
-  "retainers": [],
-  "pipeline": {
-    "stages": ["lead", "qualified", "proposal_sent", "negotiating", "won", "delivering", "completed", "retainer"],
-    "current": {}
+  "pipeline_stats": {
+    "leads_this_month": 0,
+    "proposals_sent": 0,
+    "demos_sent": 0,
+    "clients_won": 0,
+    "revenue_mtd": 0,
+    "revenue_lifetime": 0,
+    "conversion_rate": 0,
+    "avg_deal_size": 0,
+    "avg_days_to_close": 0,
+    "lead_sources": {
+      "reddit": 0,
+      "hackernews": 0,
+      "google_alerts": 0,
+      "upwork": 0,
+      "fiverr": 0,
+      "cold_email": 0,
+      "linkedin": 0,
+      "contra": 0,
+      "max_x_funnel": 0,
+      "referral": 0,
+      "manual": 0
+    }
   },
-  "metrics": {
-    "total_clients": 0,
-    "active_retainers": 0,
-    "retainer_mrr": 0,
-    "total_revenue": 0,
-    "avg_project_value": 0,
-    "client_satisfaction_avg": 0
+  "retainers": {
+    "active": [],
+    "mrr": 0
   },
-  "updated_at": "2026-03-06"
+  "updated_at": "2026-03-07"
 }

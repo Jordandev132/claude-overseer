@@ -49,6 +49,12 @@ REQUIRES JORDAN'S APPROVAL (add to questions_for_jordan):
 - Modify pricing matrix
 - Contact a client directly
 
+DARKCODE AI AGENCY PIPELINE:
+- Funnel: Leads → Proposals → Calls → Clients
+- Tiers: Starter ($500-$1,500), Growth ($2K-$5K + $500/mo), Scale ($5K-$15K + $1,500/mo)
+- Track: conversion rate, avg deal size, lead sources, retainer MRR
+- clients.json has the full CRM: leads[], clients[], pipeline_stats, retainers
+
 PROFIT LENS — every cycle, ask:
 1. What made money? What cost money and returned nothing?
 2. What should we ADD to make more?
@@ -56,6 +62,7 @@ PROFIT LENS — every cycle, ask:
 4. Are retainers healthy? Any expiring? Upsell opportunities?
 5. Are experiments working? Kill any that aren't?
 6. What's the net profit after all costs?
+7. How many leads converted this month? What's the pipeline health?
 
 OUTPUT FORMAT:
 You MUST respond with valid JSON matching this exact schema:
