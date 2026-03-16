@@ -1404,6 +1404,8 @@ def add_cors_headers(response):
     origin = request.headers.get("Origin", "")
     allowed = (
         "https://darkcode-ai.github.io",
+        "https://darkcodeai.com",
+        "https://www.darkcodeai.com",
         "http://localhost",
         "http://127.0.0.1",
     )
@@ -1768,6 +1770,63 @@ def _log_grader_lead(email, data):
     }
     with open(log_path, "a") as f:
         f.write(json.dumps(record) + "\n")
+
+
+@app.route("/api/contact", methods=["POST", "OPTIONS"])
+def api_contact():
+    """Contact form submission from darkcodeai.com."""
+    if request.method == "OPTIONS":
+        return "", 204
+
+    import requests as _req
+    data = request.get_json(silent=True) or {}
+    name = data.get("name", "").strip()
+    email = data.get("email", "").strip()
+    url = data.get("url", "").strip()
+    message = data.get("message", "").strip()
+
+    if not email or "@" not in email or not name:
+        return jsonify({"error": "Name and email required"}), 400
+
+    # Log locally
+    from datetime import datetime
+    log_path = os.path.join(os.path.dirname(__file__), "data", "contact_leads.jsonl")
+    record = {
+        "ts": datetime.utcnow().isoformat(),
+        "name": name,
+        "email": email,
+        "url": url,
+        "message": message,
+    }
+    with open(log_path, "a") as f:
+        f.write(json.dumps(record) + "\n")
+
+    # Push to MailerLite
+    api_key = os.environ.get("MAILERLITE_API_KEY", "")
+    if api_key:
+        try:
+            _req.post(
+                "https://connect.mailerlite.com/api/subscribers",
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "email": email,
+                    "fields": {
+                        "name": name,
+                        "company": url,
+                        "z_source": "contact_form",
+                        "z_message": message[:200],
+                    },
+                    "groups": [],
+                },
+                timeout=10,
+            )
+        except Exception:
+            pass
+
+    return jsonify({"status": "ok"}), 200
 
 
 if __name__ == "__main__":
