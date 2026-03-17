@@ -21,6 +21,9 @@ except Exception:
     config = None  # Render deployment — API-only mode
 
 app = Flask(__name__)
+
+from brotherhood_api import bp as brotherhood_bp
+app.register_blueprint(brotherhood_bp)
 log = logging.getLogger("dashboard")
 
 TEMPLATE = """\
