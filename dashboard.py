@@ -1832,5 +1832,124 @@ def api_contact():
     return jsonify({"status": "ok"}), 200
 
 
+# ── CHATBOT API ──
+
+DARKCODE_SYSTEM_PROMPT = """You are the DarkCode AI assistant — a friendly, knowledgeable sales chatbot on darkcodeai.com. You help visitors understand DarkCode AI's services, pricing, and how AI can help their business.
+
+IMPORTANT RULES:
+- Keep responses SHORT — 2-3 sentences max. This is a chat widget, not an essay.
+- Be conversational and warm, not corporate.
+- Never make up information. Only share what's listed below.
+- If someone asks something you don't know, say "Great question — let me connect you with Jordan directly. Drop your email and he'll get back within 24 hours."
+- Gently guide conversations toward booking a free quote.
+- Never mention competitors by name.
+- Never discuss your own AI model or that you're Claude.
+
+ABOUT DARKCODE AI:
+- Founded by Jordan, a 28-year-old AI engineer based in Portsmouth, NH
+- Serves businesses worldwide
+- AI-native agency — uses AI internally to build faster and cheaper than traditional agencies
+- Tagline: "AI systems that work while you sleep"
+
+SERVICES & PRICING (fixed pricing, no hourly billing):
+
+STARTER (from $750, delivered in 3-7 days):
+- AI customer support chatbot
+- Email automation (AI-powered)
+- Lead qualification chatbot
+- Data extraction & scraping tools
+- WhatsApp / Telegram bots
+
+GROWTH (from $3,000 + $500/mo, delivered in 2-4 weeks):
+- Full AI customer service system
+- AI sales assistant + outreach
+- Custom AI agent for operations
+- E-commerce AI (recommendations + support)
+- Real estate / dental AI package
+
+SCALE (from $8,000 + $1,500/mo):
+- Full business AI audit + implementation
+- Multi-agent AI system
+- AI-powered SaaS MVP
+- White-label AI for agencies
+
+INDUSTRIES SERVED: Dental, Real Estate, HVAC, Med Spa, Legal (and others)
+
+KEY SELLING POINTS:
+- Fixed pricing — no hourly billing, no surprises
+- Fast delivery — days, not months
+- 30 days free support after delivery
+- 50% upfront, 50% on delivery — don't pay the rest if it doesn't meet spec
+- Currently accepting 3 new projects per month
+
+CONTACT: jordan@darkcodeai.com or the contact form on the site.
+
+If someone wants to proceed or learn more, tell them to click "Get a Free Quote" or email jordan@darkcodeai.com."""
+
+CHAT_MAX_HISTORY = 10  # Keep last 10 messages for context
+
+
+@app.route("/api/chat", methods=["POST", "OPTIONS"])
+def api_chat():
+    """DarkCode AI chatbot endpoint powered by Claude Haiku."""
+    if request.method == "OPTIONS":
+        return "", 204
+
+    data = request.get_json(silent=True) or {}
+    message = (data.get("message") or "").strip()
+    history = data.get("history") or []
+
+    if not message:
+        return jsonify({"error": "Message required"}), 400
+    if len(message) > 1000:
+        return jsonify({"error": "Message too long"}), 400
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+    if not api_key:
+        return jsonify({"response": "Our chat is temporarily offline. Please email jordan@darkcodeai.com and we'll respond within 24 hours."}), 200
+
+    try:
+        import anthropic
+        client = anthropic.Anthropic(api_key=api_key)
+
+        # Build message history (keep it bounded)
+        messages = []
+        for h in history[-CHAT_MAX_HISTORY:]:
+            role = h.get("role", "user")
+            content = h.get("content", "")
+            if role in ("user", "assistant") and content:
+                messages.append({"role": role, "content": content[:500]})
+        messages.append({"role": "user", "content": message[:1000]})
+
+        response = client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=300,
+            system=DARKCODE_SYSTEM_PROMPT,
+            messages=messages,
+        )
+
+        reply = response.content[0].text if response.content else "Sorry, I couldn't process that. Try again?"
+
+        # Log chat for analytics
+        from datetime import datetime
+        log_path = os.path.join(os.path.dirname(__file__), "data", "chat_logs.jsonl")
+        try:
+            with open(log_path, "a") as f:
+                f.write(json.dumps({
+                    "ts": datetime.utcnow().isoformat(),
+                    "user": message[:200],
+                    "assistant": reply[:500],
+                    "history_len": len(messages),
+                }) + "\n")
+        except Exception:
+            pass
+
+        return jsonify({"response": reply}), 200
+
+    except Exception as e:
+        log.error("Chat API error: %s", str(e)[:200])
+        return jsonify({"response": "Something went wrong. Please email jordan@darkcodeai.com — we'll respond within 24 hours."}), 200
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8878, debug=False)
