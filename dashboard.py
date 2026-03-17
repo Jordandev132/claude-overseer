@@ -22,7 +22,7 @@ except Exception:
 
 app = Flask(__name__)
 
-from brotherhood_api import bp as brotherhood_bp
+from brotherhood_api import bp as brotherhood_bp  # noqa: E402
 app.register_blueprint(brotherhood_bp)
 log = logging.getLogger("dashboard")
 

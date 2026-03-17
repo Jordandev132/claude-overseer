@@ -12,7 +12,7 @@ from pathlib import Path
 from flask import Blueprint, jsonify, request
 
 from data_readers import (
-    PATHS, read_json, read_jsonl_tail, tail_log,
+    PATHS, read_json, read_jsonl_tail,
     list_dir_json, get_launchctl_agents, get_system_metrics,
 )
 
