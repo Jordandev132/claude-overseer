@@ -91,14 +91,17 @@ def api_intelligence():
 
 @bp.route("/api/broadcasts")
 def api_broadcasts():
-    return jsonify(read_json(PATHS["broadcast"], []))
+    data = read_json(PATHS["broadcast"], [])
+    if isinstance(data, list):
+        return jsonify({"broadcasts": data})
+    return jsonify(data if isinstance(data, dict) else {"broadcasts": []})
 
 
 @bp.route("/api/events")
 def api_events():
     limit = request.args.get("limit", 20, type=int)
     events = read_jsonl_tail(PATHS["events"], limit)
-    return jsonify(events)
+    return jsonify({"events": events})
 
 
 @bp.route("/api/events/stats")
@@ -145,7 +148,8 @@ def api_system_ports():
 
 @bp.route("/api/system/launchagents")
 def api_system_launchagents():
-    return jsonify(get_launchctl_agents())
+    agents = get_launchctl_agents()
+    return jsonify({"agents": agents, "launchagents": agents})
 
 
 @bp.route("/api/system/action/<action>", methods=["POST"])
@@ -179,12 +183,15 @@ def api_system_action(action):
 @bp.route("/api/trades")
 def api_trades():
     trades = read_jsonl_tail(PATHS["trades"], 20)
-    return jsonify(trades)
+    return jsonify({"recent_trades": trades, "summary": {}, "by_asset": {}})
 
 
 @bp.route("/api/trades/live")
 def api_trades_live():
-    return jsonify(read_json(PATHS["arbiter_positions"], []))
+    positions = read_json(PATHS["arbiter_positions"], [])
+    if isinstance(positions, list):
+        return jsonify({"pending_trades": positions})
+    return jsonify(positions if isinstance(positions, dict) else {"pending_trades": []})
 
 
 @bp.route("/api/garves/daily-report/today")
@@ -231,12 +238,18 @@ def api_garves_balance():
 
 @bp.route("/api/garves/positions")
 def api_garves_positions():
-    return jsonify(read_json(PATHS["arbiter_positions"], []))
+    positions = read_json(PATHS["arbiter_positions"], [])
+    if isinstance(positions, list):
+        return jsonify({"positions": positions})
+    return jsonify(positions if isinstance(positions, dict) else {"positions": []})
 
 
 @bp.route("/api/garves/daily-reports")
 def api_garves_daily_reports():
-    return jsonify(read_json(PATHS["daily_reports"], []))
+    reports = read_json(PATHS["daily_reports"], [])
+    if isinstance(reports, list):
+        return jsonify({"reports": reports})
+    return jsonify(reports if isinstance(reports, dict) else {"reports": []})
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -281,7 +294,10 @@ def api_atlas_knowledge():
 
 @bp.route("/api/atlas/live-research")
 def api_atlas_live_research():
-    return jsonify(read_json(PATHS["atlas_research_log"], {}))
+    data = read_json(PATHS["atlas_research_log"], {})
+    if isinstance(data, list):
+        return jsonify({"entries": data})
+    return jsonify(data if isinstance(data, dict) else {"entries": []})
 
 
 @bp.route("/api/atlas/improvements", methods=["GET", "POST"])
@@ -303,12 +319,15 @@ def api_atlas_improvements_ack():
 
 @bp.route("/api/atlas/thoughts")
 def api_atlas_thoughts():
-    return jsonify(read_json(PATHS["atlas_observations"], {}))
+    data = read_json(PATHS["atlas_observations"], {})
+    if isinstance(data, list):
+        return jsonify({"observations": data})
+    return jsonify(data if isinstance(data, dict) else {"observations": []})
 
 
 @bp.route("/api/atlas/experiments")
 def api_atlas_experiments():
-    return jsonify([])
+    return jsonify({"experiments": []})
 
 
 @bp.route("/api/atlas/hub-eval")
@@ -360,7 +379,10 @@ def api_shelby_brief():
 
 @bp.route("/api/shelby/assessments")
 def api_shelby_assessments():
-    return jsonify(read_json(PATHS["shelby_tasks"], []))
+    tasks = read_json(PATHS["shelby_tasks"], [])
+    if isinstance(tasks, list):
+        return jsonify({"assessments": tasks})
+    return jsonify(tasks if isinstance(tasks, dict) else {"assessments": []})
 
 
 @bp.route("/api/shelby/economics")
@@ -380,7 +402,7 @@ def api_shelby_schedule():
     shelby_dir = PATHS["shelby_data_dir"]
     schedule_files = list_dir_json(shelby_dir)
     schedule_data = [f for f in schedule_files if "schedule" in f["file"].lower()]
-    return jsonify(schedule_data if schedule_data else [])
+    return jsonify({"schedule": schedule_data})
 
 
 @bp.route("/api/shelby/activity-brief")
@@ -460,12 +482,18 @@ def api_sentinel_scan():
 
 @bp.route("/api/sentinel/fixes")
 def api_sentinel_fixes():
-    return jsonify(read_json(PATHS["sentinel_fixes"], []))
+    fixes = read_json(PATHS["sentinel_fixes"], [])
+    if isinstance(fixes, list):
+        return jsonify({"recent_fixes": fixes})
+    return jsonify(fixes if isinstance(fixes, dict) else {"recent_fixes": []})
 
 
 @bp.route("/api/robotox/log-alerts")
 def api_robotox_log_alerts():
-    return jsonify(read_json(PATHS["log_watcher_alerts"], []))
+    alerts = read_json(PATHS["log_watcher_alerts"], [])
+    if isinstance(alerts, list):
+        return jsonify({"recent_alerts": alerts})
+    return jsonify(alerts if isinstance(alerts, dict) else {"recent_alerts": []})
 
 
 @bp.route("/api/robotox/dependencies")
@@ -489,7 +517,10 @@ def api_viper():
 
 @bp.route("/api/viper/opportunities")
 def api_viper_opportunities():
-    return jsonify(read_json(PATHS["viper_opportunities"], []))
+    opps = read_json(PATHS["viper_opportunities"], [])
+    if isinstance(opps, list):
+        return jsonify({"opportunities": opps})
+    return jsonify(opps if isinstance(opps, dict) else {"opportunities": []})
 
 
 @bp.route("/api/viper/costs")
@@ -513,17 +544,24 @@ def api_thor():
 
 @bp.route("/api/thor/queue")
 def api_thor_queue():
-    return jsonify(list_dir_json(PATHS["thor_tasks_dir"]))
+    items = list_dir_json(PATHS["thor_tasks_dir"])
+    tasks = [f.get("data", f) for f in items]
+    return jsonify({"tasks": tasks})
 
 
 @bp.route("/api/thor/results")
 def api_thor_results():
-    return jsonify(list_dir_json(PATHS["thor_results_dir"]))
+    items = list_dir_json(PATHS["thor_results_dir"])
+    results = [f.get("data", f) for f in items]
+    return jsonify({"results": results})
 
 
 @bp.route("/api/thor/smart-actions")
 def api_thor_smart_actions():
-    return jsonify(read_json(PATHS["thor_commands"], []))
+    cmds = read_json(PATHS["thor_commands"], [])
+    if isinstance(cmds, list):
+        return jsonify({"actions": cmds})
+    return jsonify(cmds if isinstance(cmds, dict) else {"actions": []})
 
 
 @bp.route("/api/thor/submit", methods=["POST"])
@@ -562,12 +600,16 @@ def api_thor_quick_action():
 def api_soren():
     queue = read_json(PATHS["soren_content_queue"], [])
     metrics = read_json(PATHS["soren_content_metrics"], {})
-    return jsonify({"content_queue": queue, "metrics": metrics})
+    items = queue if isinstance(queue, list) else []
+    return jsonify({"items": items, "content_queue": queue, "metrics": metrics})
 
 
 @bp.route("/api/soren/competitors")
 def api_soren_competitors():
-    return jsonify(read_json(PATHS["soren_competitors"], []))
+    comps = read_json(PATHS["soren_competitors"], [])
+    if isinstance(comps, list):
+        return jsonify({"competitors": comps})
+    return jsonify(comps if isinstance(comps, dict) else {"competitors": []})
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -578,7 +620,8 @@ def api_soren_competitors():
 def api_lisa():
     pending = read_json(PATHS["lisa_pending_tweets"], [])
     queue = read_json(PATHS["soren_content_queue"], [])
-    return jsonify({"pending_tweets": pending, "content_queue": queue})
+    outbox = pending if isinstance(pending, list) else []
+    return jsonify({"outbox": outbox, "pending_tweets": pending, "content_queue": queue})
 
 
 @bp.route("/api/lisa/jordan-queue")
@@ -586,8 +629,8 @@ def api_lisa_jordan_queue():
     queue = read_json(PATHS["soren_content_queue"], [])
     if isinstance(queue, list):
         pending = [item for item in queue if item.get("status") == "pending"]
-        return jsonify(pending)
-    return jsonify([])
+        return jsonify({"items": pending, "queue": pending})
+    return jsonify({"items": [], "queue": []})
 
 
 @bp.route("/api/lisa/jordan-approve/<item_id>", methods=["POST"])
@@ -607,7 +650,10 @@ def api_lisa_jordan_approve(item_id):
 
 @bp.route("/api/lisa/posting-schedule")
 def api_lisa_schedule():
-    return jsonify(read_json(PATHS["tweet_schedule"], []))
+    sched = read_json(PATHS["tweet_schedule"], [])
+    if isinstance(sched, list):
+        return jsonify({"schedule": sched, "posts": sched})
+    return jsonify(sched if isinstance(sched, dict) else {"schedule": [], "posts": []})
 
 
 @bp.route("/api/lisa/live-config")
@@ -665,7 +711,10 @@ def api_oracle():
 @bp.route("/api/oracle/predictions")
 def api_oracle_predictions():
     oracle_preds = HOME / "polymarket-bot" / "data" / "oracle_predictions.json"
-    return jsonify(read_json(oracle_preds, []))
+    preds = read_json(oracle_preds, [])
+    if isinstance(preds, list):
+        return jsonify({"predictions": preds})
+    return jsonify(preds if isinstance(preds, dict) else {"predictions": []})
 
 
 @bp.route("/api/oracle/report")
