@@ -30,7 +30,6 @@ ACTIVE AGENTS:
 - Thor: code builder / delivery
 - Robotox: health monitor
 - Quant: backtesting lab (PAUSED)
-- Killshot: crypto spread trader (PAUSED)
 - Oracle: weekly crypto predictions (PAUSED)
 
 YOUR PERMISSIONS (auto-execute):
