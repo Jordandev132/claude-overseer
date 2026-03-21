@@ -22,8 +22,12 @@ except Exception:
 
 app = Flask(__name__)
 
-from brotherhood_api import bp as brotherhood_bp  # noqa: E402
-app.register_blueprint(brotherhood_bp)
+try:
+    from brotherhood_api import bp as brotherhood_bp  # noqa: E402
+    app.register_blueprint(brotherhood_bp)
+except Exception:
+    pass  # Render deployment — brotherhood API not available (needs Pro disk paths)
+
 log = logging.getLogger("dashboard")
 
 TEMPLATE = """\
